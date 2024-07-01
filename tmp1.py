@@ -2,22 +2,39 @@ import numpy as np
 from datetime import datetime
 import pickle
 
+
+# def aaa(stack_arr, ecg_parameter):
 # 1. 파일호출
 with open(r'C:\Users\jjm\Desktop\ecg_ai\trainingDB\ecgdvq_62.5\inp_outp.pickle', 'rb') as f:
     stack_arr = pickle.load(f)
     inp = stack_arr[:, 0:160]
+    # ps_outp = stack_arr[:, 160:180]
+    # ps_outp_vf = stack_arr[:, 180:181]
+    # pe_outp = stack_arr[:, 181:201]
+    # pe_outp_vf = stack_arr[:, 201:202]
+    # qrss_outp = stack_arr[:, 202:222]
+    # qrss_outp_vf = stack_arr[:, 222:223]
+    # qrse_outp = stack_arr[:, 223:243]
+    # qrse_outp_vf = stack_arr[:, 243:244]
+    # ts_outp = stack_arr[:, 244:264]
+    # ts_outp_vf = stack_arr[:, 264:265]
+    # te_outp = stack_arr[:, 265:285]
+    # te_outp_vf = stack_arr[:, 285:286]
+    '''
+    240701 jw
+    '''
     ps_outp = stack_arr[:, 160:180]
-    ps_outp_vf = stack_arr[:, 180:181]
-    pe_outp = stack_arr[:, 181:201]
-    pe_outp_vf = stack_arr[:, 201:202]
-    qrss_outp = stack_arr[:, 202:222]
-    qrss_outp_vf = stack_arr[:, 222:223]
-    qrse_outp = stack_arr[:, 223:243]
-    qrse_outp_vf = stack_arr[:, 243:244]
-    ts_outp = stack_arr[:, 244:264]
-    ts_outp_vf = stack_arr[:, 264:265]
-    te_outp = stack_arr[:, 265:285]
-    te_outp_vf = stack_arr[:, 285:286]
+    pe_outp = stack_arr[:, 180:200]
+    qrss_outp = stack_arr[:, 200:220]
+    qrse_outp = stack_arr[:, 220:240]
+    ts_outp = stack_arr[:, 240:260]
+    te_outp = stack_arr[:, 260:280]
+    ps_outp_vf = stack_arr[:, 280]
+    pe_outp_vf = stack_arr[:, 281]
+    qrss_outp_vf = stack_arr[:, 282]
+    qrse_outp_vf = stack_arr[:, 283]
+    ts_outp_vf = stack_arr[:, 284]
+    te_outp_vf = stack_arr[:, 285]
 
 with open(r'C:\Users\jjm\Desktop\ecg_ai\trainingDB\ecgdvq_62.5\rs_i.pickle', 'rb') as f:
     ecg_parameter = pickle.load(f)
@@ -40,8 +57,11 @@ qrse_i = ecg_parameter[1::, -3]
 ts_i = ecg_parameter[1::, -2]
 te_i = ecg_parameter[1::, -1]
 
-for ps_i in range(0, len(p_rs)):
-    if int(float(p_rs[ps_i])) > 15:
+'''
+240701 jw
+'''
+for ps_x in range(0, len(p_rs)):
+    if int(float(p_rs[ps_x])) > 15:
         ref = int(ps_i / 4)
 
         if len(ps_stack_arr) == 0:
@@ -123,3 +143,5 @@ for te_i in range(0, len(t_rs)):
                 inp[ref - 16:ref + 10, :], te_outp[ref - 16:ref + 10, :]
             ))
             te_stack_arr = np.vstack((te_stack_arr, te_stack_tmp))
+
+# return k

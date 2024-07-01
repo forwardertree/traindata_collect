@@ -222,6 +222,8 @@ class ECG_DNN_Thread:
         with open(r'C:\Users\jjm\Desktop\ooo1\0001\240404\rs_i_1001_p.pickle', 'wb') as f:  # parameter
             pickle.dump(self.ecg_parameter, f)
 
+        # k = aaa(self.stack_arr, self.ecg_parameter)
+
         '''
         return 관련
         '''
